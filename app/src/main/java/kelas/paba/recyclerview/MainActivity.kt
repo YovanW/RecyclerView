@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 private lateinit var binding: ActivityMainBinding
 private val _arWayang = ArrayList<dcWayang>()
-
 private var _nama: Array<String> = arrayOf()
 private var _karakter: Array<String> = arrayOf()
 private var _deskripsi: Array<String> = arrayOf()
