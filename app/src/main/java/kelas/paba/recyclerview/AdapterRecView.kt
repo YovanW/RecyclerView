@@ -10,6 +10,7 @@ import kelas.paba.recyclerview.databinding.ItemRecycleBinding
 
 interface OnItemClickCallback {
     fun onItemClicked(data: dcWayang)
+    fun delData(pos:Int)
 }
 
 class AdapterRecView(private val listWayang: ArrayList<dcWayang>) :
@@ -50,6 +51,18 @@ class AdapterRecView(private val listWayang: ArrayList<dcWayang>) :
 
             if (::onItemClickCallback.isInitialized) {
                 onItemClickCallback.onItemClicked(wayang)
+            }
+        }
+        holder.binding.btnHapus.setOnClickListener {
+            Toast.makeText(
+                holder.itemView.context,
+                "Data ${wayang.nama} dihapus",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            val currentPosition = holder.bindingAdapterPosition
+            if (currentPosition != RecyclerView.NO_POSITION && ::onItemClickCallback.isInitialized) {
+                onItemClickCallback.delData(currentPosition)
             }
         }
     }
