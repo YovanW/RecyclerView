@@ -1,6 +1,7 @@
 package kelas.paba.recyclerview
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -14,6 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.recyclerview.widget.LinearLayoutManager
 import kelas.paba.recyclerview.databinding.ActivityMainBinding
 import kelas.paba.recyclerview.ui.theme.RecyclerViewTheme
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 private lateinit var binding: ActivityMainBinding
 private val _arWayang = ArrayList<dcWayang>()
@@ -22,8 +25,6 @@ private var _nama: Array<String> = arrayOf()
 private var _karakter: Array<String> = arrayOf()
 private var _deskripsi: Array<String> = arrayOf()
 private var _gambar: Array<String> = arrayOf()
-
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +37,10 @@ class MainActivity : ComponentActivity() {
         siapkanData()
         tambahData()
         tampilkanData()
+
+        binding.btnToggleLayout.setOnCheckedChangeListener { _, isChecked ->
+            tampilkanData()
+        }
     }
 
     private fun siapkanData(){
@@ -59,7 +64,13 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun tampilkanData(){
-        binding.rvWayang.layoutManager = LinearLayoutManager(this)
+
+        if(binding.btnToggleLayout.isChecked){
+            binding.rvWayang.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        }else{
+            binding.rvWayang.layoutManager = LinearLayoutManager(this)
+        }
+
         binding.rvWayang.adapter = AdapterRecView(_arWayang)
     }
 }
