@@ -7,4 +7,42 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <ImageView
+            android:id="@+id/ivDetailGambar"
+            android:layout_width="319dp"
+            android:layout_height="322dp"
+            tools:layout_editor_absoluteX="45dp"
+            tools:layout_editor_absoluteY="34dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvDetailNama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="376dp" />
+
+        <TextView
+            android:id="@+id/chipDetailKarakter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="437dp" />
+
+        <TextView
+            android:id="@+id/tvDetailDeskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="456dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
