@@ -3,6 +3,7 @@ package kelas.paba.recyclerview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import kelas.paba.recyclerview.databinding.ItemRecycleBinding
 
 class AdapterRecView (private val listWayang: ArrayList<dcWayang>): RecyclerView.Adapter<AdapterRecView.ListViewHolder>() {
@@ -22,6 +23,11 @@ class AdapterRecView (private val listWayang: ArrayList<dcWayang>): RecyclerView
         holder.binding.namaWayang.text = wayang.nama
         holder.binding.karakterWayang.text = wayang.karakter
         holder.binding.deskripsiWayang.text = wayang.deskripsi
+        holder.binding.gambarWayang.load(wayang.foto){
+            crossfade(true)
+            placeholder(R.drawable.ic_launcher_foreground)
+            error(R.drawable.ic_launcher_background)
+        }
     }
 
     override fun getItemCount(): Int {
