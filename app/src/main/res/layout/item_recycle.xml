@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="16dp">
 
         <ImageView
@@ -26,8 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="namaWayang"
-            app:layout_constraintStart_toEndOf="@+id/gambarWayang"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gambarWayang"
             app:layout_constraintTop_toTopOf="@+id/gambarWayang" />
 
         <TextView
@@ -36,8 +36,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="karakterWayang"
-            app:layout_constraintStart_toStartOf="@+id/namaWayang"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/namaWayang"
             app:layout_constraintTop_toBottomOf="@+id/namaWayang" />
 
         <TextView
@@ -46,8 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="deskripsiWayang"
-            app:layout_constraintStart_toStartOf="@+id/namaWayang"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/namaWayang"
             app:layout_constraintTop_toBottomOf="@+id/karakterWayang" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
