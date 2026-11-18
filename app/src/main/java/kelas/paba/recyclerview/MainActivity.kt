@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
+import android.app.AlertDialog
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
@@ -21,6 +21,8 @@ import kelas.paba.recyclerview.databinding.ActivityMainBinding
 import kelas.paba.recyclerview.ui.theme.RecyclerViewTheme
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import android.widget.EditText
+import android.widget.LinearLayout
 
 private lateinit var binding: ActivityMainBinding
 private val _arWayang = ArrayList<dcWayang>()
@@ -55,7 +57,7 @@ class MainActivity : ComponentActivity() {
 
     private fun tambahData(){
         _arWayang.clear()
-        for (i in _nama.indices){
+        for (i in _nama.indices) {
             val wayang = dcWayang(
                 foto = _gambar[i],
                 nama = _nama[i],
@@ -68,6 +70,7 @@ class MainActivity : ComponentActivity() {
 
     private fun tampilkanData(){
         val adapterWayang = AdapterRecView(_arWayang)
+
         adapterWayang.setOnItemClickCallback(object : OnItemClickCallback {
             override fun onItemClicked(data: dcWayang) {
                 val intent = Intent(this@MainActivity, DetailActivity::class.java).apply{
@@ -78,7 +81,9 @@ class MainActivity : ComponentActivity() {
                 }
                 startActivity(intent)
             }
+
             override fun delData(pos: Int) {
+                if (pos !in _arWayang.indices) return
                 val item = _arWayang[pos]
                 AlertDialog.Builder(this@MainActivity)
                     .setTitle("Konfirmasi Hapus Data")
@@ -97,6 +102,10 @@ class MainActivity : ComponentActivity() {
                     .show()
             }
         })
+        binding.rvWayang.layoutManager =
+            if (binding.btnToggleLayout.isChecked) GridLayoutManager(this, 2)
+            else LinearLayoutManager(this)
+        binding.rvWayang.adapter = adapterWayang
     }
 
 }
