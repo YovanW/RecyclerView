@@ -54,12 +54,6 @@ class AdapterRecView(private val listWayang: ArrayList<dcWayang>) :
             }
         }
         holder.binding.btnHapus.setOnClickListener {
-            Toast.makeText(
-                holder.itemView.context,
-                "Data ${wayang.nama} dihapus",
-                Toast.LENGTH_SHORT
-            ).show()
-
             val currentPosition = holder.bindingAdapterPosition
             if (currentPosition != RecyclerView.NO_POSITION && ::onItemClickCallback.isInitialized) {
                 onItemClickCallback.delData(currentPosition)

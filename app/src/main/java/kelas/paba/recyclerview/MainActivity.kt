@@ -3,11 +3,14 @@ package kelas.paba.recyclerview
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -75,6 +78,25 @@ class MainActivity : ComponentActivity() {
                 }
                 startActivity(intent)
             }
+            override fun delData(pos: Int) {
+                val item = _arWayang[pos]
+                AlertDialog.Builder(this@MainActivity)
+                    .setTitle("Konfirmasi Hapus Data")
+                    .setMessage("Apakah Anda yakin ingin menghapus data ${item.nama}?")
+                    .setPositiveButton("Hapus") { _, _ ->
+                        _arWayang.removeAt(pos)
+                        adapterWayang.notifyItemRemoved(pos)
+                        adapterWayang.notifyItemRangeChanged(pos, _arWayang.size - pos)
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Data ${item.nama} berhasil dihapus",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    .setNegativeButton("Tidak", null)
+                    .show()
+            }
         })
     }
+
 }
