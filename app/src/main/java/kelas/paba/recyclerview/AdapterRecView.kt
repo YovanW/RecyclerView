@@ -8,21 +8,27 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import coil.load
 import kelas.paba.recyclerview.databinding.ItemRecycleBinding
 
-class AdapterRecView (private val listWayang: ArrayList<dcWayang>): RecyclerView.Adapter<AdapterRecView.ListViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ListViewHolder {
+interface OnItemClickCallback {
+    fun onItemClicked(data: dcWayang)
+}
+
+class AdapterRecView(private val listWayang: ArrayList<dcWayang>) :
+    RecyclerView.Adapter<AdapterRecView.ListViewHolder>() {
+
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = ItemRecycleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
     }
 
-    override fun onBindViewHolder(
-        holder: ListViewHolder,
-        position: Int
-    ) {
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val wayang = listWayang[position]
-        val circularProgressDrawable = CircularProgressDrawable(holder.itemView.context).apply{
+        val circularProgressDrawable = CircularProgressDrawable(holder.itemView.context).apply {
             strokeWidth = 5f
             centerRadius = 30f
             start()
@@ -30,7 +36,7 @@ class AdapterRecView (private val listWayang: ArrayList<dcWayang>): RecyclerView
         holder.binding.namaWayang.text = wayang.nama
         holder.binding.karakterWayang.text = wayang.karakter
         holder.binding.deskripsiWayang.text = wayang.deskripsi
-        holder.binding.gambarWayang.load(wayang.foto){
+        holder.binding.gambarWayang.load(wayang.foto) {
             crossfade(true)
             placeholder(circularProgressDrawable)
             error(R.drawable.ic_launcher_background)
@@ -41,14 +47,14 @@ class AdapterRecView (private val listWayang: ArrayList<dcWayang>): RecyclerView
                 "Gambar ${wayang.nama} diklik",
                 Toast.LENGTH_SHORT
             ).show()
+
+            if (::onItemClickCallback.isInitialized) {
+                onItemClickCallback.onItemClicked(wayang)
+            }
         }
     }
 
-    override fun getItemCount(): Int {
-        return listWayang.size
-    }
+    override fun getItemCount(): Int = listWayang.size
 
-    class ListViewHolder(val binding: ItemRecycleBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
+    class ListViewHolder(val binding: ItemRecycleBinding) : RecyclerView.ViewHolder(binding.root)
 }
