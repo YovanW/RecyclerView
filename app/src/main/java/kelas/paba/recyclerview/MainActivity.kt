@@ -1,5 +1,6 @@
 package kelas.paba.recyclerview
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.ComponentActivity
@@ -64,13 +65,17 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun tampilkanData(){
-
-        if(binding.btnToggleLayout.isChecked){
-            binding.rvWayang.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
-        }else{
-            binding.rvWayang.layoutManager = LinearLayoutManager(this)
-        }
-
-        binding.rvWayang.adapter = AdapterRecView(_arWayang)
+        val adapterWayang = AdapterRecView(_arWayang)
+        adapterWayang.setOnItemClickCallback(object : OnItemClickCallback {
+            override fun onItemClicked(data: dcWayang) {
+                val intent = Intent(this@MainActivity, DetailActivity::class.java).apply{
+                    putExtra("nama", data.nama)
+                    putExtra("karakter", data.karakter)
+                    putExtra("deskripsi", data.deskripsi)
+                    putExtra("foto", data.foto)
+                }
+                startActivity(intent)
+            }
+        })
     }
 }
